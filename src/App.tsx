@@ -9,6 +9,7 @@ interface Issue {
   date: string;
   priority: 'high' | 'medium' | 'low';
   description: string;
+  source: string;
 }
 
 interface NewsItem {
@@ -30,71 +31,115 @@ interface ImpactedPerson {
   dateReported: string;
 }
 
-// Sample current issues data
+// Sample current issues data - Last week's real news (September 13-19, 2025)
 const sampleIssues: Issue[] = [
   {
     id: 1,
-    title: "Sudan Humanitarian Crisis Escalates",
-    category: "Humanitarian",
-    date: "2025-09-14",
+    title: "NATO Condemns Russia's Drone Incursion into Poland",
+    category: "Security",
+    date: "2025-09-13",
     priority: "high",
-    description: "Conflict in Sudan displaces millions with 8-9 million facing emergency hunger levels. Famine declared in five areas as violence in Darfur worsens."
+    description: "NATO chief labels Russia's drone incursion into Poland as 'absolutely reckless' as tensions escalate between Russia and NATO allies.",
+    source: "https://abcnews.go.com/International/poland-airspace-repeatedly-violated-drone-type-objects-amid/story?id=125422386"
   },
   {
     id: 2,
-    title: "Somalia Displacement Crisis",
-    category: "Humanitarian",
+    title: "Israeli Military Orders Gaza Evacuation",
+    category: "Security",
     date: "2025-09-14",
     priority: "high",
-    description: "Renewed fighting in Gedo region displaces nearly 100,000 people. Families shelter in inadequate conditions with limited access to aid due to security threats."
+    description: "Israeli military drops flyers ordering Palestinians to evacuate Gaza Strip ahead of new offensive, escalating Middle East tensions.",
+    source: "https://globalnews.ca/video/10756276/global-national-sept-14-2"
   },
   {
     id: 3,
-    title: "South Sudan Multiple Crises",
-    category: "Health",
-    date: "2025-09-14",
-    priority: "high",
-    description: "Political instability, escalating conflict, severe food insecurity, and cholera outbreak affecting 50,000 people. Over 1 million returnees strain local communities."
-  },
-  {
-    id: 4,
-    title: "East China Sea Tensions Rise",
-    category: "Security",
-    date: "2025-09-14",
-    priority: "medium",
-    description: "Chinese Coast Guard ships enter Japanese territorial waters near Senkaku Islands for fourth time this month. Japan lodges diplomatic protest."
-  },
-  {
-    id: 5,
-    title: "ISIS External Operations Head Killed",
-    category: "Security",
-    date: "2025-09-14",
-    priority: "medium",
-    description: "U.S. special forces conduct helicopter raid in northwest Syria, killing Omar Abdul Qader, ISIS head of external operations planning attacks against U.S."
-  },
-  {
-    id: 6,
-    title: "Europe Climate Deaths Study",
-    category: "Environment",
-    date: "2025-09-14",
-    priority: "high",
-    description: "Study reports climate change may have caused 16,469 deaths in Europe during summer 2025. Extreme weather resulted in €43 billion in short-term losses."
-  },
-  {
-    id: 7,
-    title: "Philippines Corruption Protests",
+    title: "Massive London Protests and Clashes",
     category: "Political",
     date: "2025-09-14",
     priority: "medium",
-    description: "Philippine president supports public anger over massive corruption in flood-control projects but urges peaceful protests against government misconduct."
+    description: "Large-scale protests erupt in London with significant clashes between demonstrators and law enforcement, causing widespread disruption.",
+    source: "https://www.abc.net.au/news/2025-09-13/uk-anti-immigration-rally-and-counter-protests/105770802"
+  },
+  {
+    id: 4,
+    title: "Baltic Sea WWII Ammunition Environmental Crisis",
+    category: "Environment",
+    date: "2025-09-15",
+    priority: "high",
+    description: "Decaying World War II munitions are contaminating the Baltic Sea, posing severe environmental hazards amid rising Russia-NATO tensions.",
+    source: "https://abcnews.go.com/International/wireStory/huge-piles-rusty-wwii-ammunition-poisoning-baltic-sea-125580552"
+  },
+  {
+    id: 5,
+    title: "Philippines Corruption Scandal in Flood Projects",
+    category: "Political",
+    date: "2025-09-15",
+    priority: "medium",
+    description: "Philippine president supports public anger over extensive corruption in flood-control projects while urging peaceful protests.",
+    source: "https://abcnews.go.com/International/philippine-president-supports-public-anger-corruption"
+  },
+  {
+    id: 6,
+    title: "Europe Climate Deaths Reach 16,469 This Summer",
+    category: "Environment",
+    date: "2025-09-16",
+    priority: "high",
+    description: "Study reports climate change contributed to 16,469 deaths in Europe during summer 2025, highlighting urgent climate action needs.",
+    source: "https://disasterresiliencenews.com/2025/09/19/today-in-disaster-resilience-19-september-2025"
+  },
+  {
+    id: 7,
+    title: "Europe's Extreme Weather Causes €43B in Losses",
+    category: "Environment",
+    date: "2025-09-17",
+    priority: "high",
+    description: "Europe's summer of extreme weather resulted in €43 billion in short-term economic losses, devastating communities and infrastructure.",
+    source: "https://disasterresiliencenews.com/2025/09/19/today-in-disaster-resilience-19-september-2025"
   },
   {
     id: 8,
-    title: "Baltic Sea WWII Ammunition Contamination",
+    title: "Global Wildfire Paradox Worsens Human Impact",
     category: "Environment",
-    date: "2025-09-14",
+    date: "2025-09-18",
     priority: "medium",
-    description: "Huge piles of rusty World War II ammunition are contaminating the Baltic Sea, posing significant environmental hazards to marine ecosystems."
+    description: "Research shows while total wildfire area has declined globally, human impacts have worsened with increased destruction and loss.",
+    source: "https://disasterresiliencenews.com/2025/09/19/today-in-disaster-resilience-19-september-2025"
+  },
+  {
+    id: 9,
+    title: "Flood Forecasts Need Better Action Systems",
+    category: "Environment",
+    date: "2025-09-19",
+    priority: "medium",
+    description: "Experts emphasize need for accurate flood predictions, ground truth data, and effective public warning systems to mitigate disasters.",
+    source: "https://disasterresiliencenews.com/2025/09/19/today-in-disaster-resilience-19-september-2025"
+  },
+  {
+    id: 10,
+    title: "Sudan Humanitarian Crisis Displaces Millions",
+    category: "Humanitarian",
+    date: "2025-09-19",
+    priority: "high",
+    description: "Ongoing conflict in Sudan has displaced millions with 8-9 million facing emergency hunger levels and famine declared in five areas.",
+    source: "https://www.crs.org/global-emergency-updates/global-emergency-update-september-2025"
+  },
+  {
+    id: 11,
+    title: "Somalia Food Crisis Displaces 100,000",
+    category: "Humanitarian",
+    date: "2025-09-19",
+    priority: "high",
+    description: "Renewed fighting in Gedo region displaces nearly 100,000 people, exacerbating existing food crisis with inadequate shelter conditions.",
+    source: "https://www.crs.org/global-emergency-updates/global-emergency-update-september-2025"
+  },
+  {
+    id: 12,
+    title: "Turkey Political Instability Sparks Mass Protests",
+    category: "Political",
+    date: "2025-09-19",
+    priority: "medium",
+    description: "Mass protests erupt in Ankara as government attempts to remove opposition party leader, threatening democratic stability.",
+    source: "https://www.foreignexchanges.news/i/173597181/pakistan"
   }
 ];
 
@@ -114,7 +159,7 @@ const latestNews: NewsItem[] = [
     summary: "Generation Z protesters have toppled the government of Nepal, forcing the resignation of Prime Minister Sher Bahadur Deuba.",
     timestamp: "2025-09-20T09:15:00Z",
     category: "Security",
-    source: "https://www.npr.org/2025/09/19/1385604595/nepal-protests-prime-minister-sher-bahadur-deuba-resigns"
+    source: "https://www.npr.org/2025/09/20/nx-s1-5545760/nepal-protests-gen-z"
   },
   {
     id: 3,
@@ -520,7 +565,7 @@ const RunningBanner: React.FC = () => {
   return (
     <div className="banner-container">
       <div className="banner-content">
-        <span className="banner-label">GLOBAL CRISIS ALERTS</span>
+        <span className="banner-label">LATEST UPDATES</span>
         <div className="banner-text">
           {isLoading ? (
             <div className="scrolling-text">
@@ -589,6 +634,16 @@ const BulletinItem: React.FC<BulletinItemProps> = ({ issue }) => {
         </div>
       </div>
       <p className="bulletin-description">{issue.description}</p>
+      <div className="bulletin-source">
+        <a 
+          href={issue.source} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="source-link"
+        >
+          📰 Read more
+        </a>
+      </div>
     </div>
   );
 };
@@ -672,6 +727,21 @@ const App: React.FC = () => {
     return categoryMatch && priorityMatch;
   });
 
+  const handleClearAllData = () => {
+    if (window.confirm('Are you sure you want to clear ALL data? This will remove all localStorage data including issues, news, and impacted persons. This action cannot be undone.')) {
+      try {
+        localStorage.removeItem('currentIssues');
+        localStorage.removeItem('latestNews');
+        localStorage.removeItem('impactedPersons');
+        alert('All data cleared successfully! The page will reload to show fresh data.');
+        window.location.reload();
+      } catch (error) {
+        console.error('Error clearing all data:', error);
+        alert('Error clearing data. Please try again.');
+      }
+    }
+  };
+
   return (
     <div className="app">
       <div className={`top-banner-container ${isScrolled ? 'scrolled' : ''}`}>
@@ -721,8 +791,19 @@ const App: React.FC = () => {
         {/* Issues Bulletin Section */}
         <div className="issues-section">
           <div className="section-header">
-            <h2>Current Bulletin</h2>
-            <p>Stay informed with the latest updates</p>
+            <div className="header-content">
+              <div className="header-text">
+                <h2>Current Bulletin</h2>
+                <p>Stay informed with the latest updates</p>
+              </div>
+              <button 
+                onClick={handleClearAllData}
+                className="clear-all-data-btn"
+                title="Clear all localStorage data"
+              >
+                🗑️ Clear All Data
+              </button>
+            </div>
           </div>
 
         <FilterBar 
@@ -735,7 +816,7 @@ const App: React.FC = () => {
 
         <div className="bulletin-board">
           <div className="bulletin-stats">
-            <span>Showing {filteredIssues.length} of {issues.length} issues</span>
+            <span>Showing {filteredIssues.length} of {issues.length} bulletins</span>
           </div>
           
           <div className="bulletin-list">
