@@ -695,7 +695,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
 // Main App Component
 const App: React.FC = () => {
   // Load issues data from localStorage or use default data
-  const [issues, setIssues] = useState<Issue[]>(() => {
+  const [issues] = useState<Issue[]>(() => {
     try {
       const savedData = localStorage.getItem('currentIssues');
       if (savedData) {
@@ -711,14 +711,6 @@ const App: React.FC = () => {
   const [selectedPriority, setSelectedPriority] = useState('all');
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Save issues data to localStorage whenever it changes
-  useEffect(() => {
-    try {
-      localStorage.setItem('currentIssues', JSON.stringify(issues));
-    } catch (error) {
-      console.error('Error saving issues data to localStorage:', error);
-    }
-  }, [issues]);
 
   // Handle scroll events for banner shrinking
   useEffect(() => {
