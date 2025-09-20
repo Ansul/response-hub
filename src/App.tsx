@@ -86,143 +86,131 @@ const sampleIssues: Issue[] = [
 const latestNews: NewsItem[] = [
   {
     id: 1,
-    title: "Major Airport Delays Due to Weather Conditions",
-    summary: "Severe weather across multiple regions causing significant flight delays and cancellations affecting thousands of passengers.",
+    title: "Chicago ICE facility protests turn violent",
+    summary: "Dem mayor, anti-ICE protesters hit with tear gas, pepper balls during clash with federal agents outside Chicago facility",
     timestamp: "2024-01-20T10:30:00Z",
-    category: "Transportation",
-    source: "Aviation Authority"
+    category: "Security",
+    source: "https://nypost.com/2025/09/19/us-news/anti-ice-protesters-arrested-during-clash-with-federal-agents-outside-chicago-facility/"
   },
   {
     id: 2,
-    title: "Cybersecurity Alert: Travel Document System Compromised",
-    summary: "Security breach detected in travel document verification system. Immediate action required to protect passenger data.",
+    title: "Gen-Z Led Protests Toppled Nepal Government",
+    summary: "Generation Z protesters have toppled the government of Nepal, forcing the resignation of Prime Minister Sher Bahadur Deuba.",
     timestamp: "2024-01-20T09:15:00Z",
     category: "Security",
-    source: "Cyber Security Center"
+    source: "https://www.npr.org/2025/09/19/1385604595/nepal-protests-prime-minister-sher-bahadur-deuba-resigns"
   },
   {
     id: 3,
-    title: "New Immigration Policy Implementation",
-    summary: "Updated immigration procedures now in effect. All travelers must comply with new documentation requirements.",
-    timestamp: "2024-01-20T08:45:00Z",
+    title: "H1B Sticker Shock: New $100,000 Fee Could End Tech's Foreign Worker Rush",
+    summary: "Potential policy will be in effect as of 21st Sep midnight. Big tech. has communicated employees to come back",
+    timestamp: "2025-09-20T08:45:00Z",
     category: "Policy",
-    source: "Immigration Services"
-  },
-  {
-    id: 4,
-    title: "Airport Infrastructure Upgrade Complete",
-    summary: "Terminal 3 modernization project completed ahead of schedule, improving passenger experience and capacity.",
-    timestamp: "2024-01-19T16:20:00Z",
-    category: "Infrastructure",
-    source: "Airport Authority"
+    source: "https://www.whitehouse.gov/presidential-actions/2025/09/restriction-on-entry-of-certain-nonimmigrant-workers"
   }
 ];
 
 // Impacted Persons Data
 const impactedPersons: ImpactedPerson[] = [
-  {
-    id: 1,
-    name: "John Smith",
-    email: "john.smith@email.com",
-    reason: "Flight cancellation due to weather",
-    airport: "JFK International",
-    status: "pending",
-    dateReported: "2024-01-20"
-  },
-  {
-    id: 2,
-    name: "Maria Garcia",
-    email: "maria.garcia@email.com",
-    reason: "Document verification delay",
-    airport: "LAX International",
-    status: "escalated",
-    dateReported: "2024-01-20"
-  },
-  {
-    id: 3,
-    name: "Ahmed Hassan",
-    email: "ahmed.hassan@email.com",
-    reason: "Baggage handling issue",
-    airport: "Heathrow Airport",
-    status: "resolved",
-    dateReported: "2024-01-19"
-  },
-  {
-    id: 4,
-    name: "Sarah Johnson",
-    email: "sarah.johnson@email.com",
-    reason: "Immigration processing delay",
-    airport: "Toronto Pearson",
-    status: "pending",
-    dateReported: "2024-01-20"
-  },
-  {
-    id: 5,
-    name: "Chen Wei",
-    email: "chen.wei@email.com",
-    reason: "Security screening delay",
-    airport: "Beijing Capital",
-    status: "pending",
-    dateReported: "2024-01-20"
-  },
-  {
-    id: 6,
-    name: "Emma Wilson",
-    email: "emma.wilson@email.com",
-    reason: "Gate change notification failure",
-    airport: "Frankfurt Airport",
-    status: "resolved",
-    dateReported: "2024-01-19"
-  },
-  {
-    id: 7,
-    name: "David Brown",
-    email: "david.brown@email.com",
-    reason: "Check-in system malfunction",
-    airport: "Dubai International",
-    status: "escalated",
-    dateReported: "2024-01-20"
-  },
-  {
-    id: 8,
-    name: "Lisa Anderson",
-    email: "lisa.anderson@email.com",
-    reason: "Visa processing error",
-    airport: "Sydney Kingsford Smith",
-    status: "pending",
-    dateReported: "2024-01-20"
-  },
-  {
-    id: 9,
-    name: "Michael Chen",
-    email: "michael.chen@email.com",
-    reason: "Flight overbooking",
-    airport: "Singapore Changi",
-    status: "resolved",
-    dateReported: "2024-01-19"
-  },
-  {
-    id: 10,
-    name: "Anna Petrov",
-    email: "anna.petrov@email.com",
-    reason: "Customs clearance delay",
-    airport: "Moscow Sheremetyevo",
-    status: "pending",
-    dateReported: "2024-01-20"
-  }
+  // {
+  //   id: 1,
+  //   name: "John Smith",
+  //   email: "john.smith@email.com",
+  //   reason: "Flight cancellation due to weather",
+  //   airport: "JFK International",
+  //   status: "pending",
+  //   dateReported: "2024-01-20"
+  // },
+  // {
+  //   id: 2,
+  //   name: "Maria Garcia",
+  //   email: "maria.garcia@email.com",
+  //   reason: "Document verification delay",
+  //   airport: "LAX International",
+  //   status: "escalated",
+  //   dateReported: "2024-01-20"
+  // },
+  // {
+  //   id: 3,
+  //   name: "Ahmed Hassan",
+  //   email: "ahmed.hassan@email.com",
+  //   reason: "Baggage handling issue",
+  //   airport: "Heathrow Airport",
+  //   status: "resolved",
+  //   dateReported: "2024-01-19"
+  // },
+  // {
+  //   id: 4,
+  //   name: "Sarah Johnson",
+  //   email: "sarah.johnson@email.com",
+  //   reason: "Immigration processing delay",
+  //   airport: "Toronto Pearson",
+  //   status: "pending",
+  //   dateReported: "2024-01-20"
+  // },
+  // {
+  //   id: 5,
+  //   name: "Chen Wei",
+  //   email: "chen.wei@email.com",
+  //   reason: "Security screening delay",
+  //   airport: "Beijing Capital",
+  //   status: "pending",
+  //   dateReported: "2024-01-20"
+  // },
+  // {
+  //   id: 6,
+  //   name: "Emma Wilson",
+  //   email: "emma.wilson@email.com",
+  //   reason: "Gate change notification failure",
+  //   airport: "Frankfurt Airport",
+  //   status: "resolved",
+  //   dateReported: "2024-01-19"
+  // },
+  // {
+  //   id: 7,
+  //   name: "David Brown",
+  //   email: "david.brown@email.com",
+  //   reason: "Check-in system malfunction",
+  //   airport: "Dubai International",
+  //   status: "escalated",
+  //   dateReported: "2024-01-20"
+  // },
+  // {
+  //   id: 8,
+  //   name: "Lisa Anderson",
+  //   email: "lisa.anderson@email.com",
+  //   reason: "Visa processing error",
+  //   airport: "Sydney Kingsford Smith",
+  //   status: "pending",
+  //   dateReported: "2024-01-20"
+  // },
+  // {
+  //   id: 9,
+  //   name: "Michael Chen",
+  //   email: "michael.chen@email.com",
+  //   reason: "Flight overbooking",
+  //   airport: "Singapore Changi",
+  //   status: "resolved",
+  //   dateReported: "2024-01-19"
+  // },
+  // {
+  //   id: 10,
+  //   name: "Anna Petrov",
+  //   email: "anna.petrov@email.com",
+  //   reason: "Customs clearance delay",
+  //   airport: "Moscow Sheremetyevo",
+  //   status: "pending",
+  //   dateReported: "2024-01-20"
+  // }
 ];
 
-const bannerNews = [
+// Default fallback news items
+const defaultBannerNews = [
   "🔴 BREAKING: Major weather delays affecting multiple airports worldwide - Flight cancellations expected throughout the day",
   "📈 TRAVEL: New immigration policies now in effect across all terminals - Passengers advised to arrive 3 hours early for international flights",
   "🚨 SECURITY: Enhanced security measures implemented at all checkpoints - Additional screening procedures may cause longer wait times",
   "🏥 HEALTH: Updated health screening requirements for international travel - Mandatory health declarations required for all passengers",
-  "🌍 GLOBAL: International cooperation increases on travel security protocols - New collaborative measures enhance passenger safety worldwide",
-  "⚡ URGENT: System maintenance scheduled for tonight 2AM-4AM - Online check-in services will be temporarily unavailable",
-  "📊 UPDATE: Passenger traffic increased by 15% this week - Additional staff deployed to manage peak hours efficiently",
-  "🔧 NOTICE: Terminal renovations in progress - Some gates temporarily relocated to ensure minimal disruption to operations",
-  "📱 NEW: Mobile app updated with real-time flight tracking - Download the latest version for enhanced travel experience",
-  "🌐 ALERT: Cybersecurity awareness campaign launched - Passengers reminded to protect personal information during travel"
+  "🌍 GLOBAL: International cooperation increases on travel security protocols - New collaborative measures enhance passenger safety worldwide"
 ];
 
 // Latest News Component
@@ -411,24 +399,104 @@ const ImpactedPersonsTable: React.FC = () => {
 
 // Running Banner Component
 const RunningBanner: React.FC = () => {
+  const [bannerNews, setBannerNews] = useState<string[]>(defaultBannerNews);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCrisisNews = async () => {
+      try {
+        setIsLoading(true);
+        
+        // Using NewsAPI for crisis-related news
+        // Note: In production, you would need to add your API key
+        const response = await fetch(
+          'https://newsapi.org/v2/everything?q=crisis OR emergency OR disaster OR conflict OR war OR pandemic&sortBy=publishedAt&pageSize=10&language=en&apiKey=demo'
+        );
+        
+        if (response.ok) {
+          const data = await response.json();
+          if (data.articles && data.articles.length > 0) {
+            const crisisNews = data.articles
+              .filter((article: any) => 
+                article.title && 
+                article.description && 
+                !article.title.includes('undefined')
+              )
+              .slice(0, 8)
+              .map((article: any, index: number) => {
+                const emoji = getCrisisEmoji(article.title);
+                return `${emoji} ${article.title} - ${article.description?.substring(0, 100)}...`;
+              });
+            
+            if (crisisNews.length > 0) {
+              setBannerNews(crisisNews);
+            }
+          }
+        }
+      } catch (error) {
+        console.log('Using fallback news data due to API error:', error);
+        // Keep using default news if API fails
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    // Fetch news immediately
+    fetchCrisisNews();
+    
+    // Refresh news every 30 minutes
+    const interval = setInterval(fetchCrisisNews, 30 * 60 * 1000);
+    
+    return () => clearInterval(interval);
+  }, []);
+
+  const getCrisisEmoji = (title: string) => {
+    const lowerTitle = title.toLowerCase();
+    if (lowerTitle.includes('war') || lowerTitle.includes('conflict') || lowerTitle.includes('military')) {
+      return '⚔️';
+    } else if (lowerTitle.includes('earthquake') || lowerTitle.includes('flood') || lowerTitle.includes('hurricane') || lowerTitle.includes('storm')) {
+      return '🌪️';
+    } else if (lowerTitle.includes('fire') || lowerTitle.includes('wildfire')) {
+      return '🔥';
+    } else if (lowerTitle.includes('pandemic') || lowerTitle.includes('virus') || lowerTitle.includes('health')) {
+      return '🏥';
+    } else if (lowerTitle.includes('economic') || lowerTitle.includes('financial') || lowerTitle.includes('recession')) {
+      return '📉';
+    } else if (lowerTitle.includes('terror') || lowerTitle.includes('attack') || lowerTitle.includes('bomb')) {
+      return '🚨';
+    } else if (lowerTitle.includes('climate') || lowerTitle.includes('environment') || lowerTitle.includes('global warming')) {
+      return '🌍';
+    } else if (lowerTitle.includes('refugee') || lowerTitle.includes('migration') || lowerTitle.includes('displacement')) {
+      return '🏃';
+    } else {
+      return '🔴';
+    }
+  };
+
   return (
     <div className="banner-container">
       <div className="banner-content">
-        <span className="banner-label">LATEST UPDATE</span>
+        <span className="banner-label">GLOBAL CRISIS ALERTS</span>
         <div className="banner-text">
-          <div className="scrolling-text">
-            {bannerNews.map((news, index) => (
-              <span key={index} className="news-item">
-                {news}
-              </span>
-            ))}
-            {/* Duplicate for seamless loop */}
-            {bannerNews.map((news, index) => (
-              <span key={`duplicate-${index}`} className="news-item">
-                {news}
-              </span>
-            ))}
-          </div>
+          {isLoading ? (
+            <div className="scrolling-text">
+              <span className="news-item">🔄 Loading latest crisis updates from around the world...</span>
+            </div>
+          ) : (
+            <div className="scrolling-text">
+              {bannerNews.map((news, index) => (
+                <span key={index} className="news-item">
+                  {news}
+                </span>
+              ))}
+              {/* Duplicate for seamless loop */}
+              {bannerNews.map((news, index) => (
+                <span key={`duplicate-${index}`} className="news-item">
+                  {news}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
