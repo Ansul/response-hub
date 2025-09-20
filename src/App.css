@@ -109,7 +109,7 @@
 
   .scrolling-text {
     display: flex;
-    animation: scroll-left 30s linear infinite;
+    animation: scroll-left 60s linear infinite;
     white-space: nowrap;
   }
 
@@ -121,7 +121,7 @@
 
   @keyframes scroll-left {
     0% {
-      transform: translateX(100%);
+      transform: translateX(0%);
     }
     100% {
       transform: translateX(-100%);
@@ -561,7 +561,7 @@
     }
 
     .scrolling-text {
-      animation-duration: 25s;
+      animation-duration: 50s;
     }
 
     .news-item {
@@ -602,7 +602,7 @@
     }
 
     .scrolling-text {
-      animation-duration: 20s;
+      animation-duration: 40s;
     }
 
     .news-item {
