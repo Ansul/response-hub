@@ -213,11 +213,16 @@ const impactedPersons: ImpactedPerson[] = [
 ];
 
 const bannerNews = [
-  "🔴 BREAKING: Major weather delays affecting multiple airports worldwide",
-  "📈 TRAVEL: New immigration policies now in effect across all terminals",
-  "🚨 SECURITY: Enhanced security measures implemented at all checkpoints",
-  "🏥 HEALTH: Updated health screening requirements for international travel",
-  "🌍 GLOBAL: International cooperation increases on travel security protocols"
+  "🔴 BREAKING: Major weather delays affecting multiple airports worldwide - Flight cancellations expected throughout the day",
+  "📈 TRAVEL: New immigration policies now in effect across all terminals - Passengers advised to arrive 3 hours early for international flights",
+  "🚨 SECURITY: Enhanced security measures implemented at all checkpoints - Additional screening procedures may cause longer wait times",
+  "🏥 HEALTH: Updated health screening requirements for international travel - Mandatory health declarations required for all passengers",
+  "🌍 GLOBAL: International cooperation increases on travel security protocols - New collaborative measures enhance passenger safety worldwide",
+  "⚡ URGENT: System maintenance scheduled for tonight 2AM-4AM - Online check-in services will be temporarily unavailable",
+  "📊 UPDATE: Passenger traffic increased by 15% this week - Additional staff deployed to manage peak hours efficiently",
+  "🔧 NOTICE: Terminal renovations in progress - Some gates temporarily relocated to ensure minimal disruption to operations",
+  "📱 NEW: Mobile app updated with real-time flight tracking - Download the latest version for enhanced travel experience",
+  "🌐 ALERT: Cybersecurity awareness campaign launched - Passengers reminded to protect personal information during travel"
 ];
 
 // Latest News Component

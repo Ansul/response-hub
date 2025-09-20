@@ -114,7 +114,7 @@
   }
 
   .news-item {
-    margin-right: 60px;
+    margin-right: 80px;
     display: inline-block;
     flex-shrink: 0;
   }
@@ -565,7 +565,7 @@
     }
 
     .news-item {
-      margin-right: 40px;
+      margin-right: 50px;
     }
   }
   
@@ -606,7 +606,7 @@
     }
 
     .news-item {
-      margin-right: 30px;
+      margin-right: 40px;
     }
     
     .bulletin-board {
