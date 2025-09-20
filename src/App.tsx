@@ -103,7 +103,7 @@ const latestNews: NewsItem[] = [
   {
     id: 3,
     title: "H1B Sticker Shock: New $100,000 Fee Could End Tech's Foreign Worker Rush",
-    summary: "Potential policy will be in effect as of 21st Sep midnight. Big tech. has communicated employees to come back",
+    summary: "Potential policy will be in effect as of 21st Sep midnight. Big tech. has communicated employees to come back.",
     timestamp: "2025-09-20T08:45:00Z",
     category: "Policy",
     source: "https://www.whitehouse.gov/presidential-actions/2025/09/restriction-on-entry-of-certain-nonimmigrant-workers"
@@ -204,13 +204,18 @@ const impactedPersons: ImpactedPerson[] = [
   // }
 ];
 
-// Default fallback news items
+// Default fallback news items - Latest global crisis updates
 const defaultBannerNews = [
-  "🔴 BREAKING: Major weather delays affecting multiple airports worldwide - Flight cancellations expected throughout the day",
-  "📈 TRAVEL: New immigration policies now in effect across all terminals - Passengers advised to arrive 3 hours early for international flights",
-  "🚨 SECURITY: Enhanced security measures implemented at all checkpoints - Additional screening procedures may cause longer wait times",
-  "🏥 HEALTH: Updated health screening requirements for international travel - Mandatory health declarations required for all passengers",
-  "🌍 GLOBAL: International cooperation increases on travel security protocols - New collaborative measures enhance passenger safety worldwide"
+  "⚔️ BREAKING: Israeli strikes near aid site in Gaza Strip kill 31 - Humanitarian operations safety concerns escalate",
+  "🚨 URGENT: U.S. shuts Kyiv embassy over 'significant air attack' threat - Escalating tensions in the region",
+  "🌍 UN considers resolution demanding Israel end occupation of Palestinian territories - Geopolitical implications",
+  "⚔️ Putin orders military to boost troop numbers by 180,000 - Total forces now 1.5 million amid Ukraine conflict",
+  "🏥 CRISIS: 800 Gazans killed at food distribution points since May - UN reports dire humanitarian situation",
+  "🚨 EMERGENCY: Doctors Without Borders halts operations in Haiti's capital - Escalating violence impacts medical services",
+  "📉 U.S. imposes sanctions on Brazilian judge overseeing Bolsonaro coup case - Political stability concerns",
+  "🏥 URGENT: More than a dozen children die due to food shortages in Sudan camp - Humanitarian crisis deepens",
+  "🚨 ALERT: UN condemns massive vehicle bomb attack in Kabul - Scores dead and wounded in Afghanistan",
+  "🌪️ BREAKING: Magnitude 6.2 earthquake strikes near Istanbul - Scores injured, infrastructure concerns raised"
 ];
 
 // Latest News Component
