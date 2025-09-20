@@ -261,8 +261,8 @@ const ImpactedPersonsTable: React.FC = () => {
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState<string>('');
   
-  // Load data from localStorage or use default data
-  const [persons, setPersons] = useState<ImpactedPerson[]>(() => {
+  // Load data from localStorage or use default data (read-only)
+  const [persons] = useState<ImpactedPerson[]>(() => {
     try {
       const savedData = localStorage.getItem('impactedPersons');
       if (savedData) {
@@ -274,15 +274,6 @@ const ImpactedPersonsTable: React.FC = () => {
     return impactedPersons;
   });
 
-  // Save data to localStorage whenever persons state changes
-  useEffect(() => {
-    try {
-      localStorage.setItem('impactedPersons', JSON.stringify(persons));
-    } catch (error) {
-      console.error('Error saving data to localStorage:', error);
-    }
-  }, [persons]);
-
   const getStatusColor = (status: string) => {
     switch(status) {
       case 'pending': return '#ff8800';
@@ -293,32 +284,7 @@ const ImpactedPersonsTable: React.FC = () => {
   };
 
 
-  const handleAddNew = () => {
-    const newId = Math.max(...persons.map(p => p.id)) + 1;
-    const newPerson: ImpactedPerson = {
-      id: newId,
-      name: 'New Person',
-      email: 'new@example.com',
-      reason: 'New entry',
-      airport: 'TBD',
-      status: 'pending',
-      dateReported: new Date().toISOString().split('T')[0]
-    };
-    setPersons(prev => [...prev, newPerson]);
-  };
 
-  const handleDelete = (id: number) => {
-    if (window.confirm('Are you sure you want to delete this record?')) {
-      setPersons(prev => prev.filter(person => person.id !== id));
-    }
-  };
-
-  const handleClearAllData = () => {
-    if (window.confirm('Are you sure you want to clear all data? This action cannot be undone.')) {
-      localStorage.removeItem('impactedPersons');
-      setPersons(impactedPersons);
-    }
-  };
 
   const handleExportData = () => {
     try {
@@ -351,32 +317,18 @@ const ImpactedPersonsTable: React.FC = () => {
   return (
     <div className="impacted-persons-section">
       <div className="table-header">
-        <div className="table-title-section">
-          <h2>Impacted Persons Registry</h2>
-          <div className="header-actions">
-            <button 
-              onClick={handleAddNew}
-              className="add-new-btn"
-              title="Add new person"
-            >
-              + Add New
-            </button>
-            <button 
-              onClick={handleExportData}
-              className="export-btn"
-              title="Export data to JSON file"
-            >
-              📥 Export
-            </button>
-            <button 
-              onClick={handleClearAllData}
-              className="clear-btn"
-              title="Clear all data"
-            >
-              🗑️ Clear All
-            </button>
-          </div>
-        </div>
+            <div className="table-title-section">
+              <h2>Impacted Persons Registry</h2>
+              <div className="header-actions">
+                <button 
+                  onClick={handleExportData}
+                  className="export-btn"
+                  title="Export data to JSON file"
+                >
+                  📥 Export
+                </button>
+              </div>
+            </div>
         <div className="table-controls">
           <div className="search-box">
             <input
@@ -412,7 +364,6 @@ const ImpactedPersonsTable: React.FC = () => {
               <th>Airport</th>
               <th>Status</th>
               <th>Date Reported</th>
-              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -431,17 +382,6 @@ const ImpactedPersonsTable: React.FC = () => {
                   </span>
                 </td>
                 <td className="date-cell">{person.dateReported}</td>
-                <td className="actions-cell">
-                  <div className="action-buttons">
-                    <button 
-                      onClick={() => handleDelete(person.id)}
-                      className="delete-btn"
-                      title="Delete record"
-                    >
-                      🗑️
-                    </button>
-                  </div>
-                </td>
               </tr>
             ))}
           </tbody>
