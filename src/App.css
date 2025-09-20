@@ -734,6 +734,18 @@
     font-style: italic;
   }
 
+  .news-link {
+    color: #0f3460;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  .news-link:hover {
+    color: #1e4a72;
+    text-decoration: underline;
+  }
+
   /* Impacted Persons Section */
   .impacted-persons-section {
     background: white;

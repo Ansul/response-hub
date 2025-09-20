@@ -88,7 +88,7 @@ const latestNews: NewsItem[] = [
     id: 1,
     title: "Chicago ICE facility protests turn violent",
     summary: "Dem mayor, anti-ICE protesters hit with tear gas, pepper balls during clash with federal agents outside Chicago facility",
-    timestamp: "2024-01-20T10:30:00Z",
+    timestamp: "2025-09-19T10:30:00Z",
     category: "Security",
     source: "https://nypost.com/2025/09/19/us-news/anti-ice-protesters-arrested-during-clash-with-federal-agents-outside-chicago-facility/"
   },
@@ -96,7 +96,7 @@ const latestNews: NewsItem[] = [
     id: 2,
     title: "Gen-Z Led Protests Toppled Nepal Government",
     summary: "Generation Z protesters have toppled the government of Nepal, forcing the resignation of Prime Minister Sher Bahadur Deuba.",
-    timestamp: "2024-01-20T09:15:00Z",
+    timestamp: "2025-09-20T09:15:00Z",
     category: "Security",
     source: "https://www.npr.org/2025/09/19/1385604595/nepal-protests-prime-minister-sher-bahadur-deuba-resigns"
   },
@@ -241,7 +241,9 @@ const LatestNews: React.FC = () => {
             </div>
             <h3 className="news-title">{news.title}</h3>
             <p className="news-summary">{news.summary}</p>
-            <div className="news-source">Source: {news.source}</div>
+            <div className="news-source">
+              Source: <a href={news.source} target="_blank" rel="noopener noreferrer" className="news-link">Read more</a>
+            </div>
           </div>
         ))}
       </div>
