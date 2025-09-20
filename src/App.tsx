@@ -204,18 +204,18 @@ const impactedPersons: ImpactedPerson[] = [
   // }
 ];
 
-// Default fallback news items - Latest global crisis updates
+// Default fallback news items - September 19, 2025 crisis updates
 const defaultBannerNews = [
-  "⚔️ BREAKING: Israeli strikes near aid site in Gaza Strip kill 31 - Humanitarian operations safety concerns escalate",
-  "🚨 URGENT: U.S. shuts Kyiv embassy over 'significant air attack' threat - Escalating tensions in the region",
-  "🌍 UN considers resolution demanding Israel end occupation of Palestinian territories - Geopolitical implications",
-  "⚔️ Putin orders military to boost troop numbers by 180,000 - Total forces now 1.5 million amid Ukraine conflict",
-  "🏥 CRISIS: 800 Gazans killed at food distribution points since May - UN reports dire humanitarian situation",
-  "🚨 EMERGENCY: Doctors Without Borders halts operations in Haiti's capital - Escalating violence impacts medical services",
-  "📉 U.S. imposes sanctions on Brazilian judge overseeing Bolsonaro coup case - Political stability concerns",
-  "🏥 URGENT: More than a dozen children die due to food shortages in Sudan camp - Humanitarian crisis deepens",
-  "🚨 ALERT: UN condemns massive vehicle bomb attack in Kabul - Scores dead and wounded in Afghanistan",
-  "🌪️ BREAKING: Magnitude 6.2 earthquake strikes near Istanbul - Scores injured, infrastructure concerns raised"
+  "⚔️ BREAKING: Trump announces efforts to regain Bagram air base in Afghanistan - Taliban rejects foreign military presence",
+  "🚨 URGENT: Venezuela mobilizes 2,500 soldiers to La Orchila Island - U.S. military actions kill 14, UN condemns executions",
+  "🏥 CRISIS: CDC restricts MMRV vaccine for children under 4 - Febrile seizure risk sparks public health debate",
+  "🚨 EMERGENCY: Senate rejects stopgap measures - Government shutdown looms, federal operations at risk",
+  "⚔️ ALERT: Draft legislation grants Trump extensive powers to combat drug cartels - Terrorist designation and targeting powers",
+  "🏥 URGENT: States form vaccine bloc - New York, Maine, Maryland, Massachusetts, Pennsylvania, New Jersey coordinate COVID response",
+  "🚨 BREAKING: Hundreds of thousands protest in France - Labor unions strike against Macron austerity measures",
+  "🌍 CRISIS: Indonesia climate activists demand halt to coal plants - Net-zero emissions by 2050, Jakarta protests escalate",
+  "📉 URGENT: TikTok deal negotiated between Trump and Xi - Data security and ownership concerns remain unresolved",
+  "🚨 ALERT: Civil rights groups warn of intensified immigration enforcement - Potential violations of civil liberties"
 ];
 
 // Latest News Component
