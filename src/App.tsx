@@ -277,17 +277,19 @@ const ImpactedPersonsTable: React.FC = () => {
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState<string>('');
   
-  // Load data from localStorage or use default data (read-only)
+  // Load data from localStorage or use empty array (read-only)
   const [persons] = useState<ImpactedPerson[]>(() => {
     try {
       const savedData = localStorage.getItem('impactedPersons');
       if (savedData) {
-        return JSON.parse(savedData);
+        const parsedData = JSON.parse(savedData);
+        // Only return data if it's not empty, otherwise return empty array
+        return parsedData.length > 0 ? parsedData : [];
       }
     } catch (error) {
       console.error('Error loading data from localStorage:', error);
     }
-    return impactedPersons;
+    return []; // Always start with empty array
   });
 
   const getStatusColor = (status: string) => {
@@ -320,6 +322,18 @@ const ImpactedPersonsTable: React.FC = () => {
     }
   };
 
+  const handleClearData = () => {
+    if (window.confirm('Are you sure you want to clear all impacted persons data? This action cannot be undone.')) {
+      try {
+        localStorage.removeItem('impactedPersons');
+        // Force reload to show empty state
+        window.location.reload();
+      } catch (error) {
+        console.error('Error clearing data:', error);
+      }
+    }
+  };
+
   const filteredPersons = persons.filter(person => {
     const statusMatch = filterStatus === 'all' || person.status === filterStatus;
     const searchMatch = searchTerm === '' || 
@@ -336,6 +350,13 @@ const ImpactedPersonsTable: React.FC = () => {
             <div className="table-title-section">
               <h2>Impacted Registry</h2>
               <div className="header-actions">
+                <button 
+                  onClick={handleClearData}
+                  className="clear-btn"
+                  title="Clear all data"
+                >
+                  🗑️ Clear All
+                </button>
                 <button 
                   onClick={handleExportData}
                   className="export-btn"
