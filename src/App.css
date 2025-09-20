@@ -108,7 +108,7 @@
 
   .scrolling-text {
     display: flex;
-    animation: scroll-left 120s linear infinite;
+    animation: scroll-left 180s linear infinite;
     white-space: nowrap;
   }
 
@@ -560,7 +560,7 @@
     }
 
     .scrolling-text {
-      animation-duration: 100s;
+      animation-duration: 150s;
     }
 
     .news-item {
@@ -601,7 +601,7 @@
     }
 
     .scrolling-text {
-      animation-duration: 80s;
+      animation-duration: 120s;
     }
 
     .news-item {

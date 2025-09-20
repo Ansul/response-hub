@@ -34,51 +34,67 @@ interface ImpactedPerson {
 const sampleIssues: Issue[] = [
   {
     id: 1,
-    title: "Climate Change Action Summit",
-    category: "Environment",
-    date: "2024-01-15",
+    title: "Sudan Humanitarian Crisis Escalates",
+    category: "Humanitarian",
+    date: "2025-09-14",
     priority: "high",
-    description: "Global leaders gather to discuss urgent climate action measures and carbon reduction targets for 2024."
+    description: "Conflict in Sudan displaces millions with 8-9 million facing emergency hunger levels. Famine declared in five areas as violence in Darfur worsens."
   },
   {
     id: 2,
-    title: "Cybersecurity Threats on Rise",
-    category: "Technology",
-    date: "2024-01-14",
-    priority: "medium",
-    description: "New report shows 40% increase in ransomware attacks targeting small businesses and healthcare systems."
+    title: "Somalia Displacement Crisis",
+    category: "Humanitarian",
+    date: "2025-09-14",
+    priority: "high",
+    description: "Renewed fighting in Gedo region displaces nearly 100,000 people. Families shelter in inadequate conditions with limited access to aid due to security threats."
   },
   {
     id: 3,
-    title: "Housing Crisis Solutions",
-    category: "Economy",
-    date: "2024-01-13",
+    title: "South Sudan Multiple Crises",
+    category: "Health",
+    date: "2025-09-14",
     priority: "high",
-    description: "Local governments implementing new policies to address affordable housing shortages in major cities."
+    description: "Political instability, escalating conflict, severe food insecurity, and cholera outbreak affecting 50,000 people. Over 1 million returnees strain local communities."
   },
   {
     id: 4,
-    title: "Healthcare Worker Shortage",
-    category: "Healthcare",
-    date: "2024-01-12",
-    priority: "high",
-    description: "Hospitals report critical staffing levels as healthcare workers face burnout and seek alternative careers."
+    title: "East China Sea Tensions Rise",
+    category: "Security",
+    date: "2025-09-14",
+    priority: "medium",
+    description: "Chinese Coast Guard ships enter Japanese territorial waters near Senkaku Islands for fourth time this month. Japan lodges diplomatic protest."
   },
   {
     id: 5,
-    title: "AI Ethics Guidelines Released",
-    category: "Technology",
-    date: "2024-01-11",
+    title: "ISIS External Operations Head Killed",
+    category: "Security",
+    date: "2025-09-14",
     priority: "medium",
-    description: "Tech industry consortium publishes comprehensive guidelines for ethical AI development and deployment."
+    description: "U.S. special forces conduct helicopter raid in northwest Syria, killing Omar Abdul Qader, ISIS head of external operations planning attacks against U.S."
   },
   {
     id: 6,
-    title: "Global Supply Chain Disruptions",
-    category: "Economy",
-    date: "2024-01-10",
+    title: "Europe Climate Deaths Study",
+    category: "Environment",
+    date: "2025-09-14",
+    priority: "high",
+    description: "Study reports climate change may have caused 16,469 deaths in Europe during summer 2025. Extreme weather resulted in €43 billion in short-term losses."
+  },
+  {
+    id: 7,
+    title: "Philippines Corruption Protests",
+    category: "Political",
+    date: "2025-09-14",
     priority: "medium",
-    description: "Manufacturing delays continue to impact consumer goods availability worldwide due to logistics challenges."
+    description: "Philippine president supports public anger over massive corruption in flood-control projects but urges peaceful protests against government misconduct."
+  },
+  {
+    id: 8,
+    title: "Baltic Sea WWII Ammunition Contamination",
+    category: "Environment",
+    date: "2025-09-14",
+    priority: "medium",
+    description: "Huge piles of rusty World War II ammunition are contaminating the Baltic Sea, posing significant environmental hazards to marine ecosystems."
   }
 ];
 
