@@ -100,10 +100,32 @@
     font-size: 18px;
     font-weight: 500;
     text-align: center;
-    animation: fadeInSlide 0.5s ease-in-out;
     min-height: 24px;
     display: flex;
     align-items: center;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .scrolling-text {
+    display: flex;
+    animation: scroll-left 30s linear infinite;
+    white-space: nowrap;
+  }
+
+  .news-item {
+    margin-right: 60px;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
   }
   
   @keyframes fadeInSlide {
@@ -537,6 +559,14 @@
     .banner-text {
       font-size: 16px;
     }
+
+    .scrolling-text {
+      animation-duration: 25s;
+    }
+
+    .news-item {
+      margin-right: 40px;
+    }
   }
   
   @media (max-width: 480px) {
@@ -565,6 +595,18 @@
     
     .logo-network {
       display: none; /* Hide network icon on very small screens */
+    }
+
+    .banner-text {
+      font-size: 14px;
+    }
+
+    .scrolling-text {
+      animation-duration: 20s;
+    }
+
+    .news-item {
+      margin-right: 30px;
     }
     
     .bulletin-board {

@@ -318,7 +318,7 @@ const ImpactedPersonsTable: React.FC = () => {
     <div className="impacted-persons-section">
       <div className="table-header">
             <div className="table-title-section">
-              <h2>Impacted Persons Registry</h2>
+              <h2>Impacted Registry</h2>
               <div className="header-actions">
                 <button 
                   onClick={handleExportData}
@@ -395,10 +395,9 @@ const ImpactedPersonsTable: React.FC = () => {
       <div className="table-footer">
         <div className="footer-left">
           <span>Showing {filteredPersons.length} of {persons.length} records</span>
-          <span className="sync-status">💾 Data auto-saved locally</span>
         </div>
         <div className="footer-right">
-          <small>Changes persist across browser sessions</small>
+          <small>Data here can have upto 24 hours of delay for any changes to be reflected</small>
         </div>
       </div>
     </div>
@@ -407,24 +406,24 @@ const ImpactedPersonsTable: React.FC = () => {
 
 // Running Banner Component
 const RunningBanner: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => 
-        (prevIndex + 1) % bannerNews.length
-      );
-    }, 4000);
-    
-    return () => clearInterval(interval);
-  }, []);
-  
   return (
     <div className="banner-container">
       <div className="banner-content">
         <span className="banner-label">LATEST UPDATE</span>
         <div className="banner-text">
-          {bannerNews[currentIndex]}
+          <div className="scrolling-text">
+            {bannerNews.map((news, index) => (
+              <span key={index} className="news-item">
+                {news}
+              </span>
+            ))}
+            {/* Duplicate for seamless loop */}
+            {bannerNews.map((news, index) => (
+              <span key={`duplicate-${index}`} className="news-item">
+                {news}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -605,8 +604,8 @@ const App: React.FC = () => {
         {/* Issues Bulletin Section */}
         <div className="issues-section">
           <div className="section-header">
-            <h2>Current Issues Bulletin</h2>
-            <p>Stay informed with the latest updates on critical issues</p>
+            <h2>Current Bulletin</h2>
+            <p>Stay informed with the latest updates</p>
           </div>
 
         <FilterBar 
