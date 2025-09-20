@@ -16,19 +16,11 @@
     "typescript": "^4.7.4",
     "web-vitals": "^2.1.4"
   },
-  "devDependencies": {
-    "concurrently": "^8.2.2"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "server": "cd server && npm start",
-    "server:dev": "cd server && npm run dev",
-    "server:install": "cd server && npm install",
-    "dev": "concurrently \"npm run server:dev\" \"npm start\"",
-    "build:all": "npm run build && cd server && npm install --production"
+    "eject": "react-scripts eject"
   },
     "eslintConfig": {
       "extends": [

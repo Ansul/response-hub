@@ -1,21 +1,18 @@
-# Response Hub - Real-time Data Management System
+# Response Hub - Data Management Dashboard
 
-A comprehensive React-based dashboard for monitoring critical issues and managing impacted persons with real-time server synchronization and S3 storage.
+A comprehensive React-based dashboard for monitoring critical issues and managing impacted persons with local data persistence.
 
 ## 🚀 Features
 
 ### Core Functionality
-- **Real-time Data Sync** - Automatic synchronization with server and other users
-- **S3 Integration** - Excel files automatically generated and stored in AWS S3
-- **Offline Support** - Works offline with local storage, syncs when online
+- **Local Data Persistence** - All changes saved to browser localStorage
 - **CRUD Operations** - Full Create, Read, Update, Delete functionality
-- **Data Persistence** - Changes saved locally and to server
-- **Excel Export** - Download data as Excel files from S3
+- **Data Export** - Download data as JSON files
+- **Responsive Design** - Works on desktop, tablet, and mobile
+- **Real-time Updates** - Instant UI updates for all changes
 
 ### User Interface
-- **Responsive Design** - Works on desktop, tablet, and mobile
 - **Sticky Header** - Shrinks on scroll for better space utilization
-- **Real-time Status** - Shows sync status and connection state
 - **Interactive Tables** - Inline editing with validation
 - **Search & Filter** - Advanced filtering and search capabilities
 - **Modern UI** - Clean, professional interface with smooth animations
@@ -24,7 +21,7 @@ A comprehensive React-based dashboard for monitoring critical issues and managin
 - **Impacted Persons Registry** - Manage person records with full details
 - **Latest News Section** - Display and manage news updates
 - **Issues Bulletin** - Track and categorize critical issues
-- **Data Export** - Export to Excel or JSON formats
+- **Data Export** - Export to JSON format
 - **Bulk Operations** - Clear all data with confirmation
 
 ## 🏗️ Architecture
@@ -33,29 +30,19 @@ A comprehensive React-based dashboard for monitoring critical issues and managin
 - **React 18** with functional components and hooks
 - **TypeScript** for type safety
 - **CSS3** with responsive design and animations
-- **Local Storage** for offline data persistence
-- **API Service** for server communication
-
-### Backend (Node.js + Express)
-- **Express.js** REST API server
-- **AWS S3** integration for file storage
-- **Excel Generation** using XLSX library
-- **CORS** enabled for cross-origin requests
-- **Error Handling** with comprehensive logging
+- **Local Storage** for data persistence
+- **Component-based** architecture with reusable UI elements
 
 ### Data Flow
-1. **Client** makes changes to data
+1. **User** makes changes to data
 2. **Local Storage** saves changes immediately
-3. **API Service** syncs with server (if online)
-4. **Server** processes and validates data
-5. **S3** stores Excel file automatically
-6. **Other Clients** receive updates in real-time
+3. **UI** updates in real-time
+4. **Data** persists across browser sessions
 
 ## 📦 Installation
 
 ### Prerequisites
 - Node.js (v14 or higher)
-- AWS Account with S3 access
 - Git
 
 ### Quick Start
@@ -69,63 +56,19 @@ A comprehensive React-based dashboard for monitoring critical issues and managin
 2. **Install dependencies**
    ```bash
    npm install
-   npm run server:install
    ```
 
-3. **Configure environment**
+3. **Start development server**
    ```bash
-   # Copy server environment file
-   cp server/env.example server/.env
-   
-   # Edit server/.env with your AWS credentials
-   # See SERVER_SETUP.md for detailed instructions
+   npm start
    ```
 
-4. **Start development servers**
-   ```bash
-   # Start both frontend and backend
-   npm run dev
-   
-   # Or start separately
-   npm start              # Frontend only
-   npm run server:dev     # Backend only
-   ```
-
-5. **Access the application**
-   - Frontend: http://localhost:3000
-   - Backend API: http://localhost:3001
-   - Health Check: http://localhost:3001/api/health
+4. **Access the application**
+   - Open http://localhost:3000 in your browser
 
 ## 🔧 Configuration
 
-### Environment Variables
-
-#### Frontend (.env.local)
-```env
-REACT_APP_API_URL=http://localhost:3001/api
-```
-
-#### Backend (server/.env)
-```env
-# AWS S3 Configuration
-AWS_ACCESS_KEY_ID=your_aws_access_key_id
-AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key
-AWS_REGION=us-east-1
-S3_BUCKET_NAME=response-hub-data
-
-# Server Configuration
-PORT=3001
-NODE_ENV=development
-CORS_ORIGIN=http://localhost:3000
-```
-
-### AWS S3 Setup
-1. Create S3 bucket: `response-hub-data`
-2. Configure bucket permissions for public read access
-3. Create IAM user with S3 access
-4. Add credentials to server/.env
-
-See [SERVER_SETUP.md](SERVER_SETUP.md) for detailed AWS configuration.
+No additional configuration required! The application works out of the box with local storage.
 
 ## 📱 Usage
 
@@ -134,66 +77,44 @@ See [SERVER_SETUP.md](SERVER_SETUP.md) for detailed AWS configuration.
 2. **Edit Records** - Click edit icon, make changes, save
 3. **Delete Records** - Click delete icon, confirm
 4. **Search/Filter** - Use search box and status filter
-5. **Export Data** - Click "Export" to download Excel file
+5. **Export Data** - Click "Export" to download JSON file
 
-### Data Synchronization
-- **Online Mode** - Changes sync automatically to server
-- **Offline Mode** - Changes saved locally, sync when online
-- **Status Indicators** - Shows sync status and connection state
-- **Real-time Updates** - Other users see changes immediately
-
-### Excel File Management
-- **Automatic Generation** - Excel files created on data changes
-- **S3 Storage** - Files stored in AWS S3 bucket
-- **Public Access** - Excel files accessible via direct URL
-- **Version Control** - Latest data always available
+### Data Management
+- **Automatic Saving** - Changes saved to localStorage immediately
+- **Data Persistence** - Data persists across browser sessions
+- **Real-time Updates** - UI updates instantly when data changes
+- **Export Functionality** - Download data as JSON files
 
 ## 🚀 Deployment
 
 ### Production Build
 ```bash
-npm run build:all
+npm run build
 ```
 
-### Server Deployment
-1. **Environment Setup** - Configure production environment variables
-2. **Process Management** - Use PM2 for process management
-3. **Reverse Proxy** - Configure Nginx or Apache
-4. **SSL Certificate** - Enable HTTPS for security
-
-### AWS Deployment
-1. **EC2 Instance** - Deploy server to EC2
-2. **S3 Bucket** - Configure production S3 bucket
-3. **CloudFront** - Use CDN for file distribution
-4. **Load Balancer** - Scale with multiple instances
+### Static Hosting
+The application can be deployed to any static hosting service:
+- **Netlify** - Drag and drop the build folder
+- **Vercel** - Connect your GitHub repository
+- **GitHub Pages** - Deploy from GitHub repository
+- **AWS S3** - Upload build folder to S3 bucket
+- **Firebase Hosting** - Deploy with Firebase CLI
 
 ## 🔒 Security
 
 ### Data Protection
-- **Input Validation** - All data validated on server
+- **Client-side Validation** - Input validation in React components
 - **Error Handling** - Comprehensive error management
-- **CORS Configuration** - Restricted to known domains
-- **HTTPS Support** - Secure data transmission
-
-### AWS Security
-- **IAM Roles** - Least privilege access
-- **S3 Permissions** - Public read for Excel files only
-- **Environment Variables** - Secure credential storage
-- **Network Security** - VPC and security groups
+- **Local Storage** - Data stored securely in browser
+- **HTTPS Support** - Secure data transmission when deployed
 
 ## 📊 Monitoring
 
-### Health Checks
-- **API Health** - `/api/health` endpoint
-- **S3 Connectivity** - Automatic S3 health checks
-- **Data Sync Status** - Real-time sync monitoring
-- **Error Logging** - Comprehensive error tracking
-
 ### Performance
-- **Debounced Sync** - Prevents excessive API calls
-- **Local Storage** - Fast offline access
-- **Caching** - Efficient data management
+- **Local Storage** - Fast data access
+- **Efficient Rendering** - Optimized React components
 - **Responsive Design** - Optimized for all devices
+- **Error Handling** - User-friendly error messages
 
 ## 🛠️ Development
 
@@ -201,35 +122,24 @@ npm run build:all
 ```
 responsehub/
 ├── src/                    # React frontend
-│   ├── services/          # API service layer
 │   ├── App.tsx           # Main application
-│   └── App.css           # Styles
-├── server/                # Node.js backend
-│   ├── server.js         # Express server
-│   ├── package.json      # Server dependencies
-│   └── .env              # Server configuration
+│   ├── App.css           # Styles
+│   ├── index.tsx         # Entry point
+│   └── index.css         # Global styles
 ├── public/               # Static assets
-└── build/               # Production build
+│   ├── index.html        # HTML template
+│   └── logo.jpg          # Logo image
+├── build/               # Production build
+└── package.json         # Dependencies and scripts
 ```
 
 ### Available Scripts
 ```bash
 npm start              # Start React development server
 npm run build          # Build React app for production
-npm run server         # Start Node.js server
-npm run server:dev     # Start server in development mode
-npm run dev            # Start both frontend and backend
-npm run build:all      # Build everything for production
+npm test               # Run tests
+npm run eject          # Eject from Create React App
 ```
-
-### API Endpoints
-- `GET /api/health` - Health check
-- `GET /api/impacted-persons` - Get all persons
-- `POST /api/impacted-persons` - Create person
-- `PUT /api/impacted-persons/:id` - Update person
-- `DELETE /api/impacted-persons/:id` - Delete person
-- `PUT /api/impacted-persons/bulk` - Sync all persons
-- `GET /api/impacted-persons/excel` - Get Excel file URL
 
 ## 🤝 Contributing
 

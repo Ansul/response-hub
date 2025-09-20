@@ -1043,44 +1043,10 @@
     text-align: right;
   }
 
-  .sync-info {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-
   .sync-status {
+    color: #44aa44;
     font-size: 12px;
     font-weight: 500;
-  }
-
-  .sync-status.syncing {
-    color: #ff8800;
-  }
-
-  .sync-status.success {
-    color: #44aa44;
-  }
-
-  .sync-status.error {
-    color: #ff4444;
-  }
-
-  .sync-status.idle {
-    color: #666;
-  }
-
-  .connection-status {
-    font-size: 11px;
-    font-weight: 500;
-  }
-
-  .connection-status.online {
-    color: #44aa44;
-  }
-
-  .connection-status.offline {
-    color: #ff4444;
   }
 
   /* Issues Section */

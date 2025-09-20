@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { apiService, ImpactedPerson, NewsItem, Issue } from './services/api';
 
-// Types are now imported from services/api.ts
-// Local Issue interface for compatibility with existing data
-interface LocalIssue {
+// Types
+interface Issue {
   id: number;
   title: string;
   category: string;
@@ -13,29 +11,27 @@ interface LocalIssue {
   description: string;
 }
 
-// Convert between LocalIssue and API Issue formats
-const convertLocalToApiIssue = (localIssue: LocalIssue): Issue => ({
-  id: localIssue.id,
-  title: localIssue.title,
-  description: localIssue.description,
-  category: localIssue.category,
-  priority: localIssue.priority as 'low' | 'medium' | 'high' | 'critical',
-  status: 'open',
-  reportedBy: 'System',
-  reportedAt: localIssue.date
-});
+interface NewsItem {
+  id: number;
+  title: string;
+  summary: string;
+  timestamp: string;
+  category: string;
+  source: string;
+}
 
-const convertApiToLocalIssue = (apiIssue: Issue): LocalIssue => ({
-  id: apiIssue.id,
-  title: apiIssue.title,
-  description: apiIssue.description,
-  category: apiIssue.category,
-  priority: apiIssue.priority as 'high' | 'medium' | 'low',
-  date: apiIssue.reportedAt
-});
+interface ImpactedPerson {
+  id: number;
+  name: string;
+  email: string;
+  reason: string;
+  airport: string;
+  status: 'pending' | 'resolved' | 'escalated';
+  dateReported: string;
+}
 
 // Sample current issues data
-const sampleIssues: LocalIssue[] = [
+const sampleIssues: Issue[] = [
   {
     id: 1,
     title: "Climate Change Action Summit",
@@ -226,27 +222,6 @@ const bannerNews = [
 
 // Latest News Component
 const LatestNews: React.FC = () => {
-  // Load news data from localStorage or use default data
-  const [newsData, setNewsData] = useState<NewsItem[]>(() => {
-    try {
-      const savedData = localStorage.getItem('latestNews');
-      if (savedData) {
-        return JSON.parse(savedData);
-      }
-    } catch (error) {
-      console.error('Error loading news data from localStorage:', error);
-    }
-    return latestNews;
-  });
-
-  // Save news data to localStorage whenever it changes
-  useEffect(() => {
-    try {
-      localStorage.setItem('latestNews', JSON.stringify(newsData));
-    } catch (error) {
-      console.error('Error saving news data to localStorage:', error);
-    }
-  }, [newsData]);
 
   const formatTimestamp = (timestamp: string) => {
     const date = new Date(timestamp);
@@ -262,10 +237,10 @@ const LatestNews: React.FC = () => {
     <div className="latest-news-section">
       <div className="news-header">
         <h2>Latest News & Updates</h2>
-        <span className="news-count">{newsData.length} updates</span>
+        <span className="news-count">{latestNews.length} updates</span>
       </div>
       <div className="news-grid">
-        {newsData.map(news => (
+        {latestNews.map(news => (
           <div key={news.id} className="news-card">
             <div className="news-card-header">
               <span className="news-category">{news.category}</span>
@@ -287,82 +262,26 @@ const ImpactedPersonsTable: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [editingId, setEditingId] = useState<number | null>(null);
   const [editedPerson, setEditedPerson] = useState<ImpactedPerson | null>(null);
-  const [persons, setPersons] = useState<ImpactedPerson[]>(impactedPersons);
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
-  const [syncStatus, setSyncStatus] = useState<'idle' | 'syncing' | 'success' | 'error'>('idle');
-  const [excelUrl, setExcelUrl] = useState<string>('');
-
-  // Load data from server on component mount
-  useEffect(() => {
-    const loadDataFromServer = async () => {
-      try {
-        setSyncStatus('syncing');
-        const response = await apiService.getImpactedPersons();
-        if (response.success && response.data) {
-          setPersons(response.data);
-        }
-        setSyncStatus('success');
-      } catch (error) {
-        console.error('Error loading data from server:', error);
-        setSyncStatus('error');
-        
-        // Fallback to localStorage
-        try {
-          const savedData = localStorage.getItem('impactedPersons');
-          if (savedData) {
-            setPersons(JSON.parse(savedData));
-          }
-        } catch (localError) {
-          console.error('Error loading from localStorage:', localError);
-        }
+  
+  // Load data from localStorage or use default data
+  const [persons, setPersons] = useState<ImpactedPerson[]>(() => {
+    try {
+      const savedData = localStorage.getItem('impactedPersons');
+      if (savedData) {
+        return JSON.parse(savedData);
       }
-    };
-
-    if (isOnline) {
-      loadDataFromServer();
+    } catch (error) {
+      console.error('Error loading data from localStorage:', error);
     }
-  }, [isOnline]);
+    return impactedPersons;
+  });
 
-  // Monitor online/offline status
-  useEffect(() => {
-    const handleOnline = () => setIsOnline(true);
-    const handleOffline = () => setIsOnline(false);
-
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
-
-    return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
-    };
-  }, []);
-
-  // Sync data to server when persons change
-  useEffect(() => {
-    const syncToServer = async () => {
-      if (!isOnline) return;
-      
-      try {
-        setSyncStatus('syncing');
-        await apiService.syncImpactedPersons(persons);
-        setSyncStatus('success');
-      } catch (error) {
-        console.error('Error syncing to server:', error);
-        setSyncStatus('error');
-      }
-    };
-
-    // Debounce sync to avoid too many requests
-    const timeoutId = setTimeout(syncToServer, 1000);
-    return () => clearTimeout(timeoutId);
-  }, [persons, isOnline]);
-
-  // Save to localStorage as backup
+  // Save data to localStorage whenever persons state changes
   useEffect(() => {
     try {
       localStorage.setItem('impactedPersons', JSON.stringify(persons));
     } catch (error) {
-      console.error('Error saving to localStorage:', error);
+      console.error('Error saving data to localStorage:', error);
     }
   }, [persons]);
 
@@ -380,30 +299,13 @@ const ImpactedPersonsTable: React.FC = () => {
     setEditedPerson({ ...person });
   };
 
-  const handleSave = async () => {
+  const handleSave = () => {
     if (editedPerson) {
-      try {
-        if (isOnline) {
-          const response = await apiService.updateImpactedPerson(editedPerson.id, editedPerson);
-          if (response.success) {
-            setPersons(prev => prev.map(person => 
-              person.id === editedPerson.id ? editedPerson : person
-            ));
-          } else {
-            throw new Error(response.error || 'Failed to update person');
-          }
-        } else {
-          // Offline mode - update locally
-          setPersons(prev => prev.map(person => 
-            person.id === editedPerson.id ? editedPerson : person
-          ));
-        }
-        setEditingId(null);
-        setEditedPerson(null);
-      } catch (error) {
-        console.error('Error saving person:', error);
-        alert('Error saving person. Please try again.');
-      }
+      setPersons(prev => prev.map(person => 
+        person.id === editedPerson.id ? editedPerson : person
+      ));
+      setEditingId(null);
+      setEditedPerson(null);
     }
   };
 
@@ -418,65 +320,28 @@ const ImpactedPersonsTable: React.FC = () => {
     }
   };
 
-  const handleAddNew = async () => {
-    try {
-      const newId = Date.now(); // Use timestamp for unique ID
-      const newPerson: ImpactedPerson = {
-        id: newId,
-        name: '',
-        email: '',
-        reason: '',
-        airport: '',
-        status: 'pending',
-        dateReported: new Date().toISOString().split('T')[0]
-      };
-
-      if (isOnline) {
-        const response = await apiService.createImpactedPerson(newPerson);
-        if (response.success && response.data) {
-          setPersons(prev => [...prev, response.data!]);
-          setEditingId(response.data.id);
-          setEditedPerson({ ...response.data });
-        } else {
-          throw new Error(response.error || 'Failed to create person');
-        }
-      } else {
-        // Offline mode - add locally
-        setPersons(prev => [...prev, newPerson]);
-        setEditingId(newId);
-        setEditedPerson({ ...newPerson });
-      }
-    } catch (error) {
-      console.error('Error adding person:', error);
-      alert('Error adding person. Please try again.');
-    }
+  const handleAddNew = () => {
+    const newId = Math.max(...persons.map(p => p.id)) + 1;
+    const newPerson: ImpactedPerson = {
+      id: newId,
+      name: '',
+      email: '',
+      reason: '',
+      airport: '',
+      status: 'pending',
+      dateReported: new Date().toISOString().split('T')[0]
+    };
+    setPersons(prev => [...prev, newPerson]);
+    setEditingId(newId);
+    setEditedPerson({ ...newPerson });
   };
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = (id: number) => {
     if (window.confirm('Are you sure you want to delete this record?')) {
-      try {
-        if (isOnline) {
-          const response = await apiService.deleteImpactedPerson(id);
-          if (response.success) {
-            setPersons(prev => prev.filter(person => person.id !== id));
-            if (editingId === id) {
-              setEditingId(null);
-              setEditedPerson(null);
-            }
-          } else {
-            throw new Error(response.error || 'Failed to delete person');
-          }
-        } else {
-          // Offline mode - delete locally
-          setPersons(prev => prev.filter(person => person.id !== id));
-          if (editingId === id) {
-            setEditingId(null);
-            setEditedPerson(null);
-          }
-        }
-      } catch (error) {
-        console.error('Error deleting person:', error);
-        alert('Error deleting person. Please try again.');
+      setPersons(prev => prev.filter(person => person.id !== id));
+      if (editingId === id) {
+        setEditingId(null);
+        setEditedPerson(null);
       }
     }
   };
@@ -488,30 +353,18 @@ const ImpactedPersonsTable: React.FC = () => {
     }
   };
 
-  const handleExportData = async () => {
+  const handleExportData = () => {
     try {
-      if (isOnline) {
-        // Get Excel file URL from server
-        const response = await apiService.getExcelFileUrl();
-        if (response.success && response.data?.url) {
-          // Open Excel file in new tab
-          window.open(response.data.url, '_blank');
-        } else {
-          throw new Error('Failed to get Excel file URL');
-        }
-      } else {
-        // Offline mode - export as JSON
-        const dataStr = JSON.stringify(persons, null, 2);
-        const dataBlob = new Blob([dataStr], { type: 'application/json' });
-        const url = URL.createObjectURL(dataBlob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `impacted-persons-${new Date().toISOString().split('T')[0]}.json`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-      }
+      const dataStr = JSON.stringify(persons, null, 2);
+      const dataBlob = new Blob([dataStr], { type: 'application/json' });
+      const url = URL.createObjectURL(dataBlob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `impacted-persons-${new Date().toISOString().split('T')[0]}.json`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
     } catch (error) {
       console.error('Error exporting data:', error);
       alert('Error exporting data. Please try again.');
@@ -717,22 +570,10 @@ const ImpactedPersonsTable: React.FC = () => {
       <div className="table-footer">
         <div className="footer-left">
           <span>Showing {filteredPersons.length} of {persons.length} records</span>
-          <div className="sync-info">
-            <span className={`sync-status ${syncStatus}`}>
-              {syncStatus === 'syncing' && '🔄 Syncing...'}
-              {syncStatus === 'success' && '✅ Synced to server'}
-              {syncStatus === 'error' && '❌ Sync failed'}
-              {syncStatus === 'idle' && '💾 Ready to sync'}
-            </span>
-            <span className={`connection-status ${isOnline ? 'online' : 'offline'}`}>
-              {isOnline ? '🌐 Online' : '📴 Offline'}
-            </span>
-          </div>
+          <span className="sync-status">💾 Data auto-saved locally</span>
         </div>
         <div className="footer-right">
-          <small>
-            {isOnline ? 'Changes sync to server & S3' : 'Changes saved locally'}
-          </small>
+          <small>Changes persist across browser sessions</small>
         </div>
       </div>
     </div>
@@ -767,7 +608,7 @@ const RunningBanner: React.FC = () => {
 
 // Bulletin Item Component
 interface BulletinItemProps {
-  issue: LocalIssue;
+  issue: Issue;
 }
 
 const BulletinItem: React.FC<BulletinItemProps> = ({ issue }) => {
@@ -853,100 +694,29 @@ const FilterBar: React.FC<FilterBarProps> = ({
 
 // Main App Component
 const App: React.FC = () => {
-  // State management
-  const [issues, setIssues] = useState<LocalIssue[]>(sampleIssues);
+  // Load issues data from localStorage or use default data
+  const [issues, setIssues] = useState<Issue[]>(() => {
+    try {
+      const savedData = localStorage.getItem('currentIssues');
+      if (savedData) {
+        return JSON.parse(savedData);
+      }
+    } catch (error) {
+      console.error('Error loading issues data from localStorage:', error);
+    }
+    return sampleIssues;
+  });
+
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedPriority, setSelectedPriority] = useState('all');
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
-  const [lastSync, setLastSync] = useState<Date | null>(null);
-  const [syncStatus, setSyncStatus] = useState<'idle' | 'syncing' | 'success' | 'error'>('idle');
 
-  // Load data from server on component mount
-  useEffect(() => {
-    const loadDataFromServer = async () => {
-      try {
-        setSyncStatus('syncing');
-        
-        // Load issues data
-        const issuesResponse = await apiService.getIssues();
-        if (issuesResponse.success && issuesResponse.data) {
-          const localIssues = issuesResponse.data.map(convertApiToLocalIssue);
-          setIssues(localIssues);
-        }
-        
-        setLastSync(new Date());
-        setSyncStatus('success');
-      } catch (error) {
-        console.error('Error loading data from server:', error);
-        setSyncStatus('error');
-        
-        // Fallback to localStorage
-        try {
-          const savedData = localStorage.getItem('currentIssues');
-          if (savedData) {
-            setIssues(JSON.parse(savedData));
-          }
-        } catch (localError) {
-          console.error('Error loading from localStorage:', localError);
-        }
-      }
-    };
-
-    if (isOnline) {
-      loadDataFromServer();
-    }
-  }, [isOnline]);
-
-  // Monitor online/offline status
-  useEffect(() => {
-    const handleOnline = () => {
-      setIsOnline(true);
-      setSyncStatus('idle');
-    };
-    
-    const handleOffline = () => {
-      setIsOnline(false);
-      setSyncStatus('error');
-    };
-
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
-
-    return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
-    };
-  }, []);
-
-  // Sync data to server when issues change
-  useEffect(() => {
-    const syncToServer = async () => {
-      if (!isOnline) return;
-      
-      try {
-        setSyncStatus('syncing');
-        const apiIssues = issues.map(convertLocalToApiIssue);
-        await apiService.syncIssues(apiIssues);
-        setLastSync(new Date());
-        setSyncStatus('success');
-      } catch (error) {
-        console.error('Error syncing to server:', error);
-        setSyncStatus('error');
-      }
-    };
-
-    // Debounce sync to avoid too many requests
-    const timeoutId = setTimeout(syncToServer, 1000);
-    return () => clearTimeout(timeoutId);
-  }, [issues, isOnline]);
-
-  // Save to localStorage as backup
+  // Save issues data to localStorage whenever it changes
   useEffect(() => {
     try {
       localStorage.setItem('currentIssues', JSON.stringify(issues));
     } catch (error) {
-      console.error('Error saving to localStorage:', error);
+      console.error('Error saving issues data to localStorage:', error);
     }
   }, [issues]);
 
