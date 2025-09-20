@@ -260,8 +260,6 @@ const LatestNews: React.FC = () => {
 const ImpactedPersonsTable: React.FC = () => {
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const [editingId, setEditingId] = useState<number | null>(null);
-  const [editedPerson, setEditedPerson] = useState<ImpactedPerson | null>(null);
   
   // Load data from localStorage or use default data
   const [persons, setPersons] = useState<ImpactedPerson[]>(() => {
@@ -294,55 +292,24 @@ const ImpactedPersonsTable: React.FC = () => {
     }
   };
 
-  const handleEdit = (person: ImpactedPerson) => {
-    setEditingId(person.id);
-    setEditedPerson({ ...person });
-  };
-
-  const handleSave = () => {
-    if (editedPerson) {
-      setPersons(prev => prev.map(person => 
-        person.id === editedPerson.id ? editedPerson : person
-      ));
-      setEditingId(null);
-      setEditedPerson(null);
-    }
-  };
-
-  const handleCancel = () => {
-    setEditingId(null);
-    setEditedPerson(null);
-  };
-
-  const handleInputChange = (field: keyof ImpactedPerson, value: string) => {
-    if (editedPerson) {
-      setEditedPerson({ ...editedPerson, [field]: value });
-    }
-  };
 
   const handleAddNew = () => {
     const newId = Math.max(...persons.map(p => p.id)) + 1;
     const newPerson: ImpactedPerson = {
       id: newId,
-      name: '',
-      email: '',
-      reason: '',
-      airport: '',
+      name: 'New Person',
+      email: 'new@example.com',
+      reason: 'New entry',
+      airport: 'TBD',
       status: 'pending',
       dateReported: new Date().toISOString().split('T')[0]
     };
     setPersons(prev => [...prev, newPerson]);
-    setEditingId(newId);
-    setEditedPerson({ ...newPerson });
   };
 
   const handleDelete = (id: number) => {
     if (window.confirm('Are you sure you want to delete this record?')) {
       setPersons(prev => prev.filter(person => person.id !== id));
-      if (editingId === id) {
-        setEditingId(null);
-        setEditedPerson(null);
-      }
     }
   };
 
@@ -451,111 +418,29 @@ const ImpactedPersonsTable: React.FC = () => {
           <tbody>
             {filteredPersons.map(person => (
               <tr key={person.id}>
-                <td className="name-cell">
-                  {editingId === person.id ? (
-                    <input
-                      type="text"
-                      value={editedPerson?.name || ''}
-                      onChange={(e) => handleInputChange('name', e.target.value)}
-                      className="edit-input"
-                    />
-                  ) : (
-                    person.name
-                  )}
-                </td>
-                <td className="email-cell">
-                  {editingId === person.id ? (
-                    <input
-                      type="email"
-                      value={editedPerson?.email || ''}
-                      onChange={(e) => handleInputChange('email', e.target.value)}
-                      className="edit-input"
-                    />
-                  ) : (
-                    person.email
-                  )}
-                </td>
-                <td className="reason-cell">
-                  {editingId === person.id ? (
-                    <input
-                      type="text"
-                      value={editedPerson?.reason || ''}
-                      onChange={(e) => handleInputChange('reason', e.target.value)}
-                      className="edit-input"
-                    />
-                  ) : (
-                    person.reason
-                  )}
-                </td>
-                <td className="airport-cell">
-                  {editingId === person.id ? (
-                    <input
-                      type="text"
-                      value={editedPerson?.airport || ''}
-                      onChange={(e) => handleInputChange('airport', e.target.value)}
-                      className="edit-input"
-                    />
-                  ) : (
-                    person.airport
-                  )}
-                </td>
+                <td className="name-cell">{person.name}</td>
+                <td className="email-cell">{person.email}</td>
+                <td className="reason-cell">{person.reason}</td>
+                <td className="airport-cell">{person.airport}</td>
                 <td className="status-cell">
-                  {editingId === person.id ? (
-                    <select
-                      value={editedPerson?.status || 'pending'}
-                      onChange={(e) => handleInputChange('status', e.target.value)}
-                      className="edit-select"
-                    >
-                      <option value="pending">Pending</option>
-                      <option value="resolved">Resolved</option>
-                      <option value="escalated">Escalated</option>
-                    </select>
-                  ) : (
-                    <span 
-                      className="status-badge"
-                      style={{ backgroundColor: getStatusColor(person.status) }}
-                    >
-                      {person.status.toUpperCase()}
-                    </span>
-                  )}
+                  <span 
+                    className="status-badge"
+                    style={{ backgroundColor: getStatusColor(person.status) }}
+                  >
+                    {person.status.toUpperCase()}
+                  </span>
                 </td>
                 <td className="date-cell">{person.dateReported}</td>
                 <td className="actions-cell">
-                  {editingId === person.id ? (
-                    <div className="action-buttons">
-                      <button 
-                        onClick={handleSave}
-                        className="save-btn"
-                        title="Save changes"
-                      >
-                        ✓
-                      </button>
-                      <button 
-                        onClick={handleCancel}
-                        className="cancel-btn"
-                        title="Cancel editing"
-                      >
-                        ✕
-                      </button>
-                    </div>
-                  ) : (
-                    <div className="action-buttons">
-                      <button 
-                        onClick={() => handleEdit(person)}
-                        className="edit-btn"
-                        title="Edit record"
-                      >
-                        ✏️
-                      </button>
-                      <button 
-                        onClick={() => handleDelete(person.id)}
-                        className="delete-btn"
-                        title="Delete record"
-                      >
-                        🗑️
-                      </button>
-                    </div>
-                  )}
+                  <div className="action-buttons">
+                    <button 
+                      onClick={() => handleDelete(person.id)}
+                      className="delete-btn"
+                      title="Delete record"
+                    >
+                      🗑️
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
